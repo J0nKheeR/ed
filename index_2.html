@@ -1,0 +1,2076 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Édouard Desrosiers | Ébénisterie d'Art</title>
+    <meta name="description" content="Édouard Desrosiers — Ébéniste sculpteur québécois. Sculptures, mobilier et objets d'art en bois massif.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════
+           ATELIER NOIR — Brutalist Architectural
+           ═══════════════════════════════════════════ */
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --noir: #080808;
+            --surface: #0f0f0f;
+            --surface-2: #161616;
+            --surface-3: #1c1c1c;
+            --border: #252525;
+            --border-hover: #363636;
+            --text: #dfdcd7;
+            --text-muted: #605c57;
+            --text-dim: #3d3a36;
+            --accent: #e8582a;
+            --accent-dim: rgba(232, 88, 42, 0.1);
+            --accent-mid: rgba(232, 88, 42, 0.25);
+            --sage: #8a9e7c;
+            --sage-dim: rgba(138, 158, 124, 0.1);
+
+            --font-display: 'Syne', system-ui, sans-serif;
+            --font-mono: 'DM Mono', 'Courier New', monospace;
+
+            --sidebar-w: 72px;
+            --chat-w: 340px;
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 15px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+
+        body {
+            font-family: var(--font-mono);
+            background: var(--noir);
+            color: var(--text);
+            line-height: 1.65;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Grain */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 10000;
+            opacity: 0.03;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 180px;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--noir);
+        }
+
+        img { display: block; max-width: 100%; }
+        a { color: inherit; text-decoration: none; }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            line-height: 1.1;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 1rem;
+            padding: 0.6rem 1.2rem;
+            background: var(--accent);
+            color: var(--noir);
+            font-weight: 700;
+            z-index: 20000;
+            transition: top 0.3s;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* ═══════════════════════════
+           LAYOUT — 3 Colonnes
+           ═══════════════════════════ */
+
+        .app {
+            display: grid;
+            grid-template-columns: var(--sidebar-w) 1fr var(--chat-w);
+            min-height: 100vh;
+        }
+
+        /* ═══════════════════════════
+           SIDEBAR NAV
+           ═══════════════════════════ */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-w);
+            height: 100vh;
+            z-index: 100;
+            background: var(--noir);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 0;
+        }
+
+        .sidebar-logo {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            margin-bottom: auto;
+            transition: color 0.3s;
+        }
+
+        .sidebar-logo:hover {
+            color: var(--accent);
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            margin-bottom: auto;
+        }
+
+        .sidebar-nav a {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s;
+            padding-right: 8px;
+        }
+
+        .sidebar-nav a::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 2px;
+            height: 0;
+            background: var(--accent);
+            transition: height 0.4s var(--ease);
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            color: var(--text);
+        }
+
+        .sidebar-nav a.active::before {
+            height: 100%;
+        }
+
+        .sidebar-copy {
+            font-size: 0.55rem;
+            color: var(--text-dim);
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            letter-spacing: 1px;
+        }
+
+        /* ═══════════════════════════
+           MAIN CONTENT
+           ═══════════════════════════ */
+
+        .main {
+            grid-column: 2;
+            min-height: 100vh;
+        }
+
+        /* ── HERO ── */
+
+        .hero {
+            height: 100vh;
+            min-height: 650px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 4rem 5rem;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        /* Gradient subtil */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 50% 40% at 80% 20%, var(--accent-dim) 0%, transparent 100%),
+                radial-gradient(ellipse 40% 50% at 10% 80%, var(--sage-dim) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        /* Lignes de grille architecturales */
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.035;
+            background-image:
+                linear-gradient(90deg, var(--text) 1px, transparent 1px),
+                linear-gradient(0deg, var(--text) 1px, transparent 1px);
+            background-size: 80px 80px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 0.2s forwards;
+        }
+
+        .hero-name {
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 9vw, 7rem);
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -3px;
+            line-height: 0.95;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease) 0.4s forwards;
+        }
+
+        .hero-name span {
+            display: block;
+        }
+
+        /* Ligne accent */
+        .hero-line {
+            width: 80px;
+            height: 2px;
+            background: var(--accent);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: lineGrow 0.8s var(--ease) 0.8s forwards;
+        }
+
+        @keyframes lineGrow {
+            from { opacity: 0; width: 0; }
+            to { opacity: 1; width: 80px; }
+        }
+
+        .hero-motto {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-style: italic;
+            font-weight: 300;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: 0.6rem;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 1s forwards;
+        }
+
+        .hero-sub {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 1.2s forwards;
+        }
+
+        /* Section number flottant */
+        .hero-number {
+            position: absolute;
+            top: 3rem;
+            right: 4rem;
+            font-family: var(--font-display);
+            font-size: 12rem;
+            font-weight: 800;
+            color: var(--text);
+            opacity: 0.025;
+            line-height: 1;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── DRAWERS ── */
+
+        .drawers {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .drawer {
+            border-top: 1px solid var(--border);
+        }
+
+        .drawer-header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.6rem 4rem;
+            background: var(--surface);
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            transition: background 0.3s;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .drawer-header:hover {
+            background: var(--surface-2);
+        }
+
+        .drawer-num {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            min-width: 24px;
+        }
+
+        .drawer-label {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            flex: 1;
+        }
+
+        .drawer-toggle {
+            font-family: var(--font-mono);
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            transition: transform 0.5s var(--ease), color 0.3s;
+            line-height: 1;
+        }
+
+        .drawer.open .drawer-toggle {
+            transform: rotate(45deg);
+            color: var(--accent);
+        }
+
+        .drawer-body {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.6s var(--ease);
+        }
+
+        .drawer.open .drawer-body {
+            grid-template-rows: 1fr;
+        }
+
+        .drawer-inner {
+            overflow: hidden;
+        }
+
+        .drawer-content {
+            padding: 3rem 4rem 4rem;
+            background: var(--noir);
+        }
+
+        /* ── ARTISAN (Drawer 01) ── */
+
+        .artisan-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .artisan-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+        }
+
+        .artisan-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(30%) contrast(1.05);
+            transition: filter 0.6s, transform 0.8s var(--ease);
+        }
+
+        .artisan-image:hover img {
+            filter: grayscale(0%) contrast(1);
+            transform: scale(1.03);
+        }
+
+        /* Cadre géométrique */
+        .artisan-image::after {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: -12px;
+            bottom: -12px;
+            border: 1px solid var(--accent);
+            opacity: 0.3;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .artisan-image:hover::after {
+            opacity: 0.6;
+        }
+
+        .artisan-text h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .artisan-motto {
+            font-style: italic;
+            font-weight: 300;
+            font-size: 0.88rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            padding-left: 1rem;
+            border-left: 2px solid var(--accent);
+            opacity: 0.8;
+        }
+
+        .artisan-text p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            line-height: 1.75;
+        }
+
+        .artisan-sig {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--text-dim);
+            margin-top: 2rem;
+        }
+
+        /* ── CRÉATIONS (Drawer 02) ── */
+
+        .filter-row {
+            display: flex;
+            gap: 0.4rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.4rem 1rem;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--text-muted);
+            color: var(--text);
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--noir);
+        }
+
+        /* Galerie horizontale */
+        .gallery-scroll {
+            display: flex;
+            gap: 1px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            margin: 0 -4rem;
+            padding: 0 4rem;
+            cursor: grab;
+        }
+
+        .gallery-scroll:active {
+            cursor: grabbing;
+        }
+
+        .gallery-scroll::-webkit-scrollbar {
+            height: 3px;
+        }
+
+        .gallery-scroll::-webkit-scrollbar-track {
+            background: var(--surface);
+        }
+
+        .gallery-scroll::-webkit-scrollbar-thumb {
+            background: var(--accent);
+        }
+
+        .gallery-card {
+            flex-shrink: 0;
+            width: 320px;
+            scroll-snap-align: start;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--surface);
+            transition: opacity 0.4s, transform 0.4s;
+        }
+
+        .gallery-card[data-hidden="true"] {
+            display: none;
+        }
+
+        .gallery-card-img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            filter: grayscale(40%);
+            transition: filter 0.5s, transform 0.6s var(--ease);
+        }
+
+        .gallery-card:hover .gallery-card-img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        .gallery-card-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 4rem 1.5rem 1.5rem;
+            background: linear-gradient(0deg, rgba(8,8,8,0.92) 0%, transparent 100%);
+            transform: translateY(100%);
+            transition: transform 0.5s var(--ease);
+        }
+
+        .gallery-card:hover .gallery-card-info {
+            transform: translateY(0);
+        }
+
+        .gallery-card-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .gallery-card-cat {
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        /* Scroll hint */
+        .scroll-hint {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+            color: var(--text-dim);
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .scroll-hint-line {
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            animation: scrollHintPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollHintPulse {
+            0%, 100% { opacity: 0.3; width: 40px; }
+            50% { opacity: 1; width: 60px; }
+        }
+
+        /* ── PHILOSOPHIE (Drawer 03) ── */
+
+        .philo-motto {
+            text-align: center;
+            padding: 2.5rem 0 3.5rem;
+            position: relative;
+        }
+
+        .philo-motto::before,
+        .philo-motto::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+            opacity: 0.4;
+        }
+
+        .philo-motto::before { top: 0; }
+        .philo-motto::after { bottom: 0; }
+
+        .philo-motto p {
+            font-family: var(--font-display);
+            font-size: clamp(1.3rem, 2.5vw, 2rem);
+            font-weight: 500;
+            font-style: italic;
+            color: var(--accent);
+            opacity: 0.8;
+            letter-spacing: 1px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--border);
+            margin-top: 2rem;
+        }
+
+        .value-cell {
+            background: var(--noir);
+            padding: 2.5rem;
+            transition: background 0.4s;
+            position: relative;
+        }
+
+        .value-cell:hover {
+            background: var(--surface-2);
+        }
+
+        .value-cell::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.5s var(--ease);
+        }
+
+        .value-cell:hover::before {
+            width: 100%;
+        }
+
+        .value-num {
+            font-family: var(--font-display);
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .value-cell h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.3px;
+        }
+
+        .value-cell p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+        }
+
+        /* ── CONTACT (Drawer 04) ── */
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info .subtitle {
+            font-size: 0.75rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item-icon {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+            color: var(--accent);
+        }
+
+        .contact-item strong {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-item span {
+            font-size: 0.85rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            background: var(--surface);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.7rem 0;
+            border: none;
+            border-bottom: 1px solid var(--border);
+            background: transparent;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text);
+            transition: border-color 0.3s;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-dim);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 0.9rem;
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s var(--ease);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s var(--ease);
+            z-index: 0;
+        }
+
+        .btn-submit:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-submit:hover {
+            color: var(--noir);
+        }
+
+        .btn-submit span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── FOOTER ── */
+
+        .footer {
+            padding: 2rem 4rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.62rem;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            background: var(--surface);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        /* ═══════════════════════════
+           CHAT PANEL (intégré)
+           ═══════════════════════════ */
+
+        .chat {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: var(--chat-w);
+            height: 100vh;
+            z-index: 100;
+            background: var(--surface);
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            padding: 1.4rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .chat-header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .chat-header-label {
+            font-family: var(--font-mono);
+            font-size: 0.58rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--sage);
+        }
+
+        .chat-status {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.55rem;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+        }
+
+        .chat-status-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--sage);
+            animation: statusPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        .chat-header-name {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .chat-messages::-webkit-scrollbar { width: 2px; }
+        .chat-messages::-webkit-scrollbar-track { background: transparent; }
+        .chat-messages::-webkit-scrollbar-thumb { background: var(--border); }
+
+        .chat-msg {
+            max-width: 88%;
+            padding: 0.65rem 0.9rem;
+            font-size: 0.8rem;
+            line-height: 1.55;
+            animation: msgSlide 0.3s var(--ease);
+        }
+
+        @keyframes msgSlide {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-msg.bot {
+            align-self: flex-start;
+            background: var(--surface-3);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-left: 2px solid var(--sage);
+        }
+
+        .chat-msg.user {
+            align-self: flex-end;
+            background: var(--accent-dim);
+            color: var(--text);
+            border: 1px solid var(--accent-mid);
+            border-right: 2px solid var(--accent);
+        }
+
+        .chat-typing {
+            align-self: flex-start;
+            display: none;
+            gap: 3px;
+            padding: 0.65rem 0.9rem;
+            background: var(--surface-3);
+            border: 1px solid var(--border);
+            border-left: 2px solid var(--sage);
+        }
+
+        .chat-typing.visible { display: flex; }
+
+        .chat-typing span {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            animation: typeDot 1.4s ease-in-out infinite;
+        }
+
+        .chat-typing span:nth-child(2) { animation-delay: 0.12s; }
+        .chat-typing span:nth-child(3) { animation-delay: 0.24s; }
+
+        @keyframes typeDot {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.3; }
+            30% { transform: translateY(-3px); opacity: 1; }
+        }
+
+        .chat-quick {
+            padding: 0.6rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+            flex-shrink: 0;
+        }
+
+        .chat-quick-btn {
+            padding: 0.3rem 0.7rem;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.25s;
+            white-space: nowrap;
+        }
+
+        .chat-quick-btn:hover {
+            border-color: var(--sage);
+            color: var(--sage);
+            background: var(--sage-dim);
+        }
+
+        .chat-input-area {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.2rem;
+            border-top: 1px solid var(--border);
+            background: var(--noir);
+            flex-shrink: 0;
+        }
+
+        .chat-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text);
+            outline: none;
+            padding: 0.3rem 0;
+        }
+
+        .chat-input::placeholder { color: var(--text-dim); }
+
+        .chat-send {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--accent);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .chat-send:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--noir);
+        }
+
+        .chat-send svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        .chat-footer {
+            padding: 0.4rem 1.5rem;
+            font-size: 0.5rem;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            text-align: center;
+            text-transform: uppercase;
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+            flex-shrink: 0;
+        }
+
+        /* ═══════════════════════════
+           LIGHTBOX
+           ═══════════════════════════ */
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 8, 8, 0.95);
+            z-index: 5000;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox.active {
+            display: flex;
+            animation: lbIn 0.3s ease;
+        }
+
+        @keyframes lbIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox-inner {
+            position: relative;
+            max-width: 80%;
+            max-height: 85vh;
+        }
+
+        .lightbox-inner img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            animation: lbZoom 0.4s var(--ease);
+        }
+
+        @keyframes lbZoom {
+            from { transform: scale(0.94); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -2.5rem;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.3rem;
+            transition: color 0.3s;
+        }
+
+        .lightbox-close:hover { color: var(--accent); }
+
+        .lightbox-caption {
+            text-align: center;
+            margin-top: 1.2rem;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .lightbox-cat {
+            text-align: center;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-top: 0.4rem;
+        }
+
+        /* ═══════════════════════════
+           MOBILE CHAT TOGGLE
+           ═══════════════════════════ */
+
+        .chat-mobile-toggle {
+            display: none;
+            position: fixed;
+            bottom: 1.2rem;
+            right: 1.2rem;
+            z-index: 800;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--sage);
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            transition: all 0.3s;
+        }
+
+        .chat-mobile-toggle:hover {
+            border-color: var(--sage);
+        }
+
+        .chat-mobile-toggle svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ═══════════════════════════
+           RESPONSIVE
+           ═══════════════════════════ */
+
+        @media (max-width: 1200px) {
+            :root {
+                --chat-w: 300px;
+            }
+
+            .gallery-card { width: 280px; }
+        }
+
+        @media (max-width: 1024px) {
+            :root {
+                --sidebar-w: 0px;
+                --chat-w: 0px;
+            }
+
+            .app {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar { display: none; }
+
+            .chat {
+                position: fixed;
+                top: auto;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                height: 0;
+                border-left: none;
+                border-top: 1px solid var(--border);
+                transition: height 0.5s var(--ease);
+                z-index: 500;
+            }
+
+            .chat.mobile-open {
+                height: 70vh;
+            }
+
+            .chat-mobile-toggle {
+                display: flex;
+            }
+
+            .hero {
+                padding: 0 2rem 4rem;
+            }
+
+            .drawer-header {
+                padding: 1.2rem 2rem;
+            }
+
+            .drawer-content {
+                padding: 2rem;
+            }
+
+            .artisan-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .footer {
+                padding: 1.5rem 2rem;
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .gallery-scroll {
+                margin: 0 -2rem;
+                padding: 0 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-name {
+                font-size: 2.8rem;
+                letter-spacing: -1px;
+            }
+
+            .gallery-card { width: 260px; }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .chat.mobile-open {
+                height: 85vh;
+            }
+        }
+
+        /* Mobile nav overlay */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            padding: 1rem 1.5rem;
+            background: rgba(8, 8, 8, 0.9);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border);
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 1024px) {
+            .mobile-nav { display: flex; }
+            .hero { padding-top: 5rem; }
+        }
+
+        .mobile-nav-brand {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .mobile-nav-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .mobile-drawer-nav {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 199;
+            background: rgba(8,8,8,0.95);
+            backdrop-filter: blur(20px);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .mobile-drawer-nav.open { display: flex; }
+
+        .mobile-drawer-nav a {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            transition: color 0.3s;
+        }
+
+        .mobile-drawer-nav a:hover { color: var(--accent); }
+
+        /* Focus visible */
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+            html { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Aller au contenu</a>
+
+    <div class="app">
+
+        <!-- ═══ SIDEBAR ═══ -->
+        <aside class="sidebar" aria-label="Navigation latérale">
+            <a href="#hero" class="sidebar-logo" aria-label="Accueil">É.D.</a>
+            <ul class="sidebar-nav" role="list">
+                <li><a href="#drawer-artisan" data-section="artisan" class="active">01 Artisan</a></li>
+                <li><a href="#drawer-creations" data-section="creations">02 Créations</a></li>
+                <li><a href="#drawer-philo" data-section="philo">03 Philosophie</a></li>
+                <li><a href="#drawer-contact" data-section="contact">04 Contact</a></li>
+            </ul>
+            <span class="sidebar-copy">© 2024</span>
+        </aside>
+
+        <!-- ═══ MAIN ═══ -->
+        <main class="main" id="main-content">
+
+            <!-- Hero -->
+            <section class="hero" id="hero">
+                <div class="hero-number" aria-hidden="true">ÉD</div>
+                <div class="hero-content">
+                    <p class="hero-label">Ébénisterie d'art & sculpture</p>
+                    <h1 class="hero-name">
+                        <span>Édouard</span>
+                        <span>Desrosiers</span>
+                    </h1>
+                    <div class="hero-line" aria-hidden="true"></div>
+                    <p class="hero-motto">« Lève la tête et regarde plus loin »</p>
+                    <p class="hero-sub">Ébénisterie d'art · Sculpture sur bois · Québec</p>
+                </div>
+            </section>
+
+            <!-- Drawers -->
+            <div class="drawers">
+
+                <!-- 01 — L'Artisan -->
+                <div class="drawer open" id="drawer-artisan" data-drawer="artisan">
+                    <button class="drawer-header" aria-expanded="true">
+                        <span class="drawer-num">01</span>
+                        <span class="drawer-label">L'Artisan</span>
+                        <span class="drawer-toggle" aria-hidden="true">+</span>
+                    </button>
+                    <div class="drawer-body">
+                        <div class="drawer-inner">
+                            <div class="drawer-content">
+                                <div class="artisan-grid">
+                                    <div class="artisan-image">
+                                        <img src="images/edouard_atelier.png"
+                                             alt="Édouard Desrosiers dans son atelier, sculptant une pièce en bois massif"
+                                             loading="lazy">
+                                    </div>
+                                    <div class="artisan-text">
+                                        <h2>Une histoire gravée dans le temps</h2>
+                                        <p class="artisan-motto">"Lève la tête et regarde plus loin"</p>
+                                        <p>
+                                            Dans mon atelier, chaque pièce de bois raconte une histoire
+                                            que je m'efforce de révéler. Depuis vingt ans, je sculpte non seulement la matière, mais aussi
+                                            une vision : celle d'un art qui élève l'âme et dépasse le quotidien.
+                                        </p>
+                                        <p>
+                                            Mon travail puise son inspiration dans les forêts du Québec, là où les arbres touchent le ciel.
+                                            Chaque création — qu'il s'agisse d'une chaise, d'une sculpture ou d'un simple objet du quotidien —
+                                            porte en elle cette invitation à regarder plus haut, à chercher la beauté au-delà de l'évidence.
+                                        </p>
+                                        <p>
+                                            Je travaille l'érable, le noyer et le chêne avec des outils qui ont appartenu à mon grand-père,
+                                            dans une démarche qui honore la tradition tout en embrassant la modernité. Car regarder plus loin,
+                                            c'est aussi respecter d'où l'on vient.
+                                        </p>
+                                        <p class="artisan-sig">— Édouard</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 02 — Créations -->
+                <div class="drawer open" id="drawer-creations" data-drawer="creations">
+                    <button class="drawer-header" aria-expanded="true">
+                        <span class="drawer-num">02</span>
+                        <span class="drawer-label">Créations</span>
+                        <span class="drawer-toggle" aria-hidden="true">+</span>
+                    </button>
+                    <div class="drawer-body">
+                        <div class="drawer-inner">
+                            <div class="drawer-content">
+                                <div class="filter-row">
+                                    <button class="filter-btn active" data-filter="tous">Tout</button>
+                                    <button class="filter-btn" data-filter="sculpture">Sculptures</button>
+                                    <button class="filter-btn" data-filter="meuble">Mobilier</button>
+                                    <button class="filter-btn" data-filter="objet">Objets</button>
+                                </div>
+
+                                <div class="gallery-scroll" id="galleryScroll">
+                                    <div class="gallery-card" data-category="sculpture" tabindex="0" role="button" aria-label="Vers le Ciel — Sculpture en érable sycomore">
+                                        <img class="gallery-card-img" src="https://images.unsplash.com/photo-1561839561-b13bcfe95249?w=500&h=660&fit=crop" alt="Sculpture Vers le Ciel" loading="lazy">
+                                        <div class="gallery-card-info">
+                                            <h3 class="gallery-card-title">Vers le Ciel</h3>
+                                            <span class="gallery-card-cat">Sculpture — Érable sycomore</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="gallery-card" data-category="meuble" tabindex="0" role="button" aria-label="Racines et Branches — Table en noyer noir">
+                                        <img class="gallery-card-img" src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&h=660&fit=crop" alt="Table Racines et Branches" loading="lazy">
+                                        <div class="gallery-card-info">
+                                            <h3 class="gallery-card-title">Racines et Branches</h3>
+                                            <span class="gallery-card-cat">Table — Noyer noir</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="gallery-card" data-category="objet" tabindex="0" role="button" aria-label="Élévation — Vase sculpté en frêne">
+                                        <img class="gallery-card-img" src="https://images.unsplash.com/photo-1611486212557-88be5ff6f941?w=500&h=660&fit=crop" alt="Vase Élévation" loading="lazy">
+                                        <div class="gallery-card-info">
+                                            <h3 class="gallery-card-title">Élévation</h3>
+                                            <span class="gallery-card-cat">Vase sculpté — Frêne</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="gallery-card" data-category="sculpture" tabindex="0" role="button" aria-label="Le Regard tourné — Buste en chêne centenaire">
+                                        <img class="gallery-card-img" src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=500&h=660&fit=crop" alt="Buste Le Regard tourné" loading="lazy">
+                                        <div class="gallery-card-info">
+                                            <h3 class="gallery-card-title">Le Regard tourné</h3>
+                                            <span class="gallery-card-cat">Buste — Chêne centenaire</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="gallery-card" data-category="meuble" tabindex="0" role="button" aria-label="La Grande Bibliothèque — Meuble en merisier massif">
+                                        <img class="gallery-card-img" src="https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=500&h=660&fit=crop" alt="Bibliothèque en merisier" loading="lazy">
+                                        <div class="gallery-card-info">
+                                            <h3 class="gallery-card-title">La Grande Bibliothèque</h3>
+                                            <span class="gallery-card-cat">Meuble — Merisier massif</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="gallery-card" data-category="objet" tabindex="0" role="button" aria-label="Lumière d'Horizon — Lampe en bouleau">
+                                        <img class="gallery-card-img" src="https://images.unsplash.com/photo-1605112442948-8112bb4e5ad8?w=500&h=660&fit=crop" alt="Lampe Lumière d'Horizon" loading="lazy">
+                                        <div class="gallery-card-info">
+                                            <h3 class="gallery-card-title">Lumière d'Horizon</h3>
+                                            <span class="gallery-card-cat">Lampe — Bouleau</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="scroll-hint" aria-hidden="true">
+                                    <div class="scroll-hint-line"></div>
+                                    <span>défiler horizontalement</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 03 — Philosophie -->
+                <div class="drawer open" id="drawer-philo" data-drawer="philo">
+                    <button class="drawer-header" aria-expanded="true">
+                        <span class="drawer-num">03</span>
+                        <span class="drawer-label">Philosophie</span>
+                        <span class="drawer-toggle" aria-hidden="true">+</span>
+                    </button>
+                    <div class="drawer-body">
+                        <div class="drawer-inner">
+                            <div class="drawer-content">
+                                <div class="philo-motto">
+                                    <p>« Lève la tête et regarde plus loin »</p>
+                                </div>
+
+                                <div class="values-grid">
+                                    <div class="value-cell">
+                                        <span class="value-num">A.</span>
+                                        <h3>Le Bois local</h3>
+                                        <p>Je récupère des arbres tombés ou coupés pour raisons sanitaires dans la région. Chaque pièce a poussé sous nos ciels, porte notre histoire.</p>
+                                    </div>
+                                    <div class="value-cell">
+                                        <span class="value-num">B.</span>
+                                        <h3>La Verticalité</h3>
+                                        <p>Mes créations invitent au regard vers le haut. Je privilégie les lignes qui montent, les formes qui s'élancent, les perspectives qui ouvrent l'espace.</p>
+                                    </div>
+                                    <div class="value-cell">
+                                        <span class="value-num">C.</span>
+                                        <h3>Sur mesure</h3>
+                                        <p>Chaque commande commence par une conversation. Je m'implique dans votre projet pour créer une pièce qui dépasse vos attentes et transforme votre espace.</p>
+                                    </div>
+                                    <div class="value-cell">
+                                        <span class="value-num">D.</span>
+                                        <h3>Patrimoine vivant</h3>
+                                        <p>Je restaure les meubles anciens avec le même soin que je crée les neufs. Passer le flambeau, c'est aussi regarder plus loin que sa propre génération.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 04 — Contact -->
+                <div class="drawer open" id="drawer-contact" data-drawer="contact">
+                    <button class="drawer-header" aria-expanded="true">
+                        <span class="drawer-num">04</span>
+                        <span class="drawer-label">Contact</span>
+                        <span class="drawer-toggle" aria-hidden="true">+</span>
+                    </button>
+                    <div class="drawer-body">
+                        <div class="drawer-inner">
+                            <div class="drawer-content">
+                                <div class="contact-grid">
+                                    <div class="contact-info">
+                                        <h3>Visitez l'atelier</h3>
+                                        <p class="subtitle">Sur rendez-vous uniquement</p>
+
+                                        <div class="contact-item">
+                                            <span class="contact-item-icon">↗</span>
+                                            <div>
+                                                <strong>Atelier-boutique</strong>
+                                                <span>387 Chemin du Haut-Pays<br>La Malbaie, QC G5A 2P5</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="contact-item">
+                                            <span class="contact-item-icon">☎</span>
+                                            <div>
+                                                <strong>Téléphone</strong>
+                                                <span>(418) 555-0147</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="contact-item">
+                                            <span class="contact-item-icon">@</span>
+                                            <div>
+                                                <strong>Courriel</strong>
+                                                <span>edouard@desrosiers-bois.com</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="contact-item">
+                                            <span class="contact-item-icon">◷</span>
+                                            <div>
+                                                <strong>Heures d'ouverture</strong>
+                                                <span>Mar — Sam : 10h à 18h<br>Dim : sur rendez-vous</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <form class="contact-form" id="contactForm" novalidate>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="nom">Nom</label>
+                                                <input type="text" id="nom" name="nom" placeholder="Nom complet" required autocomplete="name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email">Courriel</label>
+                                                <input type="email" id="email" name="email" placeholder="votre@courriel.com" required autocomplete="email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sujet">Sujet</label>
+                                            <input type="text" id="sujet" name="sujet" placeholder="Commande sur mesure, restauration..." required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="message">Projet</label>
+                                            <textarea id="message" name="message" placeholder="Décrivez votre projet..." required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn-submit">
+                                            <span>Envoyer à Édouard</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <span>© 2024 Édouard Desrosiers — Québec</span>
+                <div class="footer-links">
+                    <a href="#" aria-label="Instagram">Instagram</a>
+                    <a href="#" aria-label="Facebook">Facebook</a>
+                    <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                </div>
+            </footer>
+
+        </main>
+
+        <!-- ═══ CHAT PANEL ═══ -->
+        <aside class="chat" id="chatPanel" aria-label="Discuter avec Édouard">
+            <div class="chat-header">
+                <div class="chat-header-top">
+                    <span class="chat-header-label">Discuter</span>
+                    <div class="chat-status">
+                        <span class="chat-status-dot"></span>
+                        en ligne
+                    </div>
+                </div>
+                <div class="chat-header-name">Édouard Desrosiers</div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages"></div>
+
+            <div class="chat-quick" id="chatQuick"></div>
+
+            <div class="chat-input-area">
+                <input class="chat-input" id="chatInput" type="text" placeholder="Votre message..." autocomplete="off">
+                <button class="chat-send" id="chatSend" aria-label="Envoyer">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="chat-footer">via telegram</div>
+        </aside>
+
+    </div>
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav">
+        <span class="mobile-nav-brand">É. Desrosiers</span>
+        <button class="mobile-nav-btn" id="mobileNavBtn" aria-label="Menu" aria-expanded="false">☰</button>
+    </div>
+
+    <div class="mobile-drawer-nav" id="mobileDrawerNav">
+        <a href="#drawer-artisan" data-close-nav>01 — L'Artisan</a>
+        <a href="#drawer-creations" data-close-nav>02 — Créations</a>
+        <a href="#drawer-philo" data-close-nav>03 — Philosophie</a>
+        <a href="#drawer-contact" data-close-nav>04 — Contact</a>
+    </div>
+
+    <!-- Mobile chat toggle -->
+    <button class="chat-mobile-toggle" id="chatMobileToggle" aria-label="Ouvrir le clavardage">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+    </button>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image agrandie">
+        <div class="lightbox-inner">
+            <button class="lightbox-close" aria-label="Fermer">&times;</button>
+            <img src="" alt="" id="lightboxImg">
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+            <div class="lightbox-cat" id="lightboxCat"></div>
+        </div>
+    </div>
+
+    <script>
+        /* ═══════════════════════════
+           DRAWERS
+           ═══════════════════════════ */
+
+        document.querySelectorAll('.drawer-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const drawer = header.closest('.drawer');
+                const isOpen = drawer.classList.toggle('open');
+                header.setAttribute('aria-expanded', isOpen);
+            });
+        });
+
+        /* ═══════════════════════════
+           SIDEBAR ACTIVE TRACKING
+           ═══════════════════════════ */
+
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        const drawerSections = document.querySelectorAll('.drawer');
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.dataset.drawer;
+                    sidebarLinks.forEach(link => {
+                        link.classList.toggle('active', link.dataset.section === id);
+                    });
+                }
+            });
+        }, { threshold: 0.3, rootMargin: '-100px 0px -40% 0px' });
+
+        drawerSections.forEach(s => sectionObserver.observe(s));
+
+        /* ═══════════════════════════
+           SIDEBAR SMOOTH SCROLL
+           ═══════════════════════════ */
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        /* ═══════════════════════════
+           GALLERY FILTER
+           ═══════════════════════════ */
+
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryCards = document.querySelectorAll('.gallery-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                galleryCards.forEach((card, i) => {
+                    const match = filter === 'tous' || card.dataset.category === filter;
+                    card.dataset.hidden = !match;
+                    if (match) {
+                        card.style.opacity = '0';
+                        setTimeout(() => {
+                            card.style.transition = 'opacity 0.4s';
+                            card.style.opacity = '1';
+                        }, i * 50);
+                    }
+                });
+            });
+        });
+
+        /* ═══════════════════════════
+           GALLERY DRAG SCROLL
+           ═══════════════════════════ */
+
+        const galleryScroll = document.getElementById('galleryScroll');
+        let isDragging = false, startX, scrollLeft;
+
+        galleryScroll.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.pageX - galleryScroll.offsetLeft;
+            scrollLeft = galleryScroll.scrollLeft;
+            galleryScroll.style.cursor = 'grabbing';
+        });
+
+        galleryScroll.addEventListener('mouseleave', () => { isDragging = false; galleryScroll.style.cursor = 'grab'; });
+        galleryScroll.addEventListener('mouseup', () => { isDragging = false; galleryScroll.style.cursor = 'grab'; });
+        galleryScroll.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - galleryScroll.offsetLeft;
+            galleryScroll.scrollLeft = scrollLeft - (x - startX) * 1.5;
+        });
+
+        /* ═══════════════════════════
+           LIGHTBOX
+           ═══════════════════════════ */
+
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightboxImg');
+        const lbCaption = document.getElementById('lightboxCaption');
+        const lbCat = document.getElementById('lightboxCat');
+
+        function openLB(card) {
+            lbImg.src = card.querySelector('.gallery-card-img').src;
+            lbCaption.textContent = card.querySelector('.gallery-card-title').textContent;
+            lbCat.textContent = card.querySelector('.gallery-card-cat').textContent;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLB() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        galleryCards.forEach(card => {
+            card.addEventListener('dblclick', () => openLB(card));
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') openLB(card);
+            });
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target.classList.contains('lightbox-close')) closeLB();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLB();
+        });
+
+        /* ═══════════════════════════
+           CONTACT FORM
+           ═══════════════════════════ */
+
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Merci pour votre message ! Édouard vous répondra sous peu.');
+            e.target.reset();
+        });
+
+        /* ═══════════════════════════
+           MOBILE NAV
+           ═══════════════════════════ */
+
+        const mobileNavBtn = document.getElementById('mobileNavBtn');
+        const mobileDrawerNav = document.getElementById('mobileDrawerNav');
+
+        mobileNavBtn.addEventListener('click', () => {
+            const isOpen = mobileDrawerNav.classList.toggle('open');
+            mobileNavBtn.setAttribute('aria-expanded', isOpen);
+            mobileNavBtn.textContent = isOpen ? '✕' : '☰';
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+
+        mobileDrawerNav.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                mobileDrawerNav.classList.remove('open');
+                mobileNavBtn.setAttribute('aria-expanded', 'false');
+                mobileNavBtn.textContent = '☰';
+                document.body.style.overflow = '';
+            });
+        });
+
+        /* ═══════════════════════════
+           MOBILE CHAT TOGGLE
+           ═══════════════════════════ */
+
+        const chatPanel = document.getElementById('chatPanel');
+        const chatMobileToggle = document.getElementById('chatMobileToggle');
+
+        chatMobileToggle.addEventListener('click', () => {
+            chatPanel.classList.toggle('mobile-open');
+        });
+
+        /* ═══════════════════════════
+           CHATBOT
+           ═══════════════════════════ */
+
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const chatSend = document.getElementById('chatSend');
+        const chatQuick = document.getElementById('chatQuick');
+
+        const responses = {
+            greetings: ['Bonjour ! Je suis l\'assistant d\'Édouard. Comment puis-je vous aider ?'],
+            commande: 'Pour une commande sur mesure, Édouard commence toujours par une conversation pour bien comprendre votre projet. Décrivez ici ce que vous avez en tête, il vous recontactera personnellement.',
+            prix: 'Chaque pièce est unique — le prix dépend de l\'essence, de la complexité et des dimensions. Édouard prépare une soumission détaillée après discussion.',
+            delai: 'Comptez 4 à 8 semaines pour un meuble sur mesure, 2 à 4 semaines pour un objet ou une sculpture. Un échéancier précis est fourni après consultation.',
+            visite: 'L\'atelier est ouvert du mardi au samedi, 10h à 18h. Dimanche sur rendez-vous. Appelez au (418) 555-0147 pour réserver.',
+            bois: 'Édouard travaille l\'érable, le noyer noir, le chêne, le frêne, le merisier et le bouleau — tous récupérés localement.',
+            restauration: 'Édouard restaure les meubles anciens en préservant leur caractère. Envoyez des photos pour un premier avis.',
+            fallback: 'Merci pour votre message. Je le transmets à Édouard, il vous répondra dans les plus brefs délais.',
+        };
+
+        const quickData = [
+            { label: 'Sur mesure', key: 'commande' },
+            { label: 'Tarifs', key: 'prix' },
+            { label: 'Délais', key: 'delai' },
+            { label: 'Visite', key: 'visite' },
+            { label: 'Bois', key: 'bois' },
+            { label: 'Restauration', key: 'restauration' },
+        ];
+
+        function addMsg(text, type) {
+            const msg = document.createElement('div');
+            msg.className = `chat-msg ${type}`;
+            msg.textContent = text;
+            chatMessages.appendChild(msg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTyping() {
+            let t = chatMessages.querySelector('.chat-typing');
+            if (!t) {
+                t = document.createElement('div');
+                t.className = 'chat-typing';
+                t.innerHTML = '<span></span><span></span><span></span>';
+                chatMessages.appendChild(t);
+            }
+            t.classList.add('visible');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTyping() {
+            const t = chatMessages.querySelector('.chat-typing');
+            if (t) t.remove();
+        }
+
+        function showQuickReplies() {
+            chatQuick.innerHTML = '';
+            quickData.forEach(q => {
+                const btn = document.createElement('button');
+                btn.className = 'chat-quick-btn';
+                btn.textContent = q.label;
+                btn.addEventListener('click', () => {
+                    addMsg(q.label, 'user');
+                    chatQuick.innerHTML = '';
+                    reply(q.key);
+                });
+                chatQuick.appendChild(btn);
+            });
+        }
+
+        function detectIntent(text) {
+            const t = text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            if (/\b(bonjour|allo|salut|hey|hi|hello)\b/.test(t)) return 'greetings';
+            if (/\b(commande|sur mesure|projet|creer|fabriquer)\b/.test(t)) return 'commande';
+            if (/\b(prix|cout|combien|tarif|soumission|budget)\b/.test(t)) return 'prix';
+            if (/\b(delai|temps|quand|livraison|semaine)\b/.test(t)) return 'delai';
+            if (/\b(visite|atelier|adresse|venir|horaire|ouvert)\b/.test(t)) return 'visite';
+            if (/\b(bois|essence|erable|noyer|chene|frene)\b/.test(t)) return 'bois';
+            if (/\b(restaur|reparer|ancien|antique|vieux)\b/.test(t)) return 'restauration';
+            return 'fallback';
+        }
+
+        function reply(key) {
+            showTyping();
+            setTimeout(() => {
+                hideTyping();
+                const pool = responses[key];
+                addMsg(Array.isArray(pool) ? pool[0] : pool, 'bot');
+                if (key !== 'fallback') setTimeout(showQuickReplies, 300);
+            }, 500 + Math.random() * 600);
+        }
+
+        function sendMsg() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+            addMsg(text, 'user');
+            chatInput.value = '';
+            chatQuick.innerHTML = '';
+
+            /*
+             * ── TELEGRAM (à venir) ──
+             * fetch('https://api.example.com/chat', {
+             *     method: 'POST',
+             *     headers: { 'Content-Type': 'application/json' },
+             *     body: JSON.stringify({ message: text })
+             * }).then(r => r.json()).then(d => { hideTyping(); addMsg(d.reply, 'bot'); });
+             */
+
+            reply(detectIntent(text));
+        }
+
+        chatSend.addEventListener('click', sendMsg);
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') { e.preventDefault(); sendMsg(); }
+        });
+
+        // Init — message de bienvenue
+        setTimeout(() => {
+            addMsg('Bonjour ! Je suis l\'assistant d\'Édouard. Posez vos questions ou explorez les sujets ci-dessous.', 'bot');
+            setTimeout(showQuickReplies, 400);
+        }, 800);
+    </script>
+</body>
+</html>

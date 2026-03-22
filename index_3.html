@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Édouard Desrosiers | Ébénisterie d'Art</title>
+    <meta name="description" content="Édouard Desrosiers — Ébéniste sculpteur québécois. Sculptures, mobilier et objets d'art en bois massif.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════
+           CHRYSALIDE — Gothic Art Nouveau
+           Inspiré par l'œuvre sculptée au papillon-opale
+           ═══════════════════════════════════════════ */
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --noir: #08070a;
+            --nuit: #0e0c12;
+            --bois-ombre: #1e1814;
+            --bois-sombre: #3a2e22;
+            --bois-chaud: #8b6b42;
+            --bois-miel: #c49a5c;
+            --bois-pale: #dcc198;
+            --ivoire: #f0e6d0;
+            --texte: #e4d8c4;
+            --texte-doux: #9a8a72;
+            --texte-dim: #5a4e3e;
+
+            /* Opale — iridescent */
+            --opale-vert: #8aab7a;
+            --opale-rose: #c4889a;
+            --opale-or: #d4b86a;
+            --opale-bleu: #6a98b4;
+            --opale-lait: #c8c0ac;
+
+            --font-ornate: 'Cinzel Decorative', 'Georgia', serif;
+            --font-heading: 'Cinzel', 'Georgia', serif;
+            --font-body: 'Spectral', 'Georgia', serif;
+
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-slow: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--noir);
+            color: var(--texte);
+            line-height: 1.75;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Grain texturé */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 10000;
+            opacity: 0.04;
+            mix-blend-mode: soft-light;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 200px;
+        }
+
+        ::selection {
+            background: var(--opale-or);
+            color: var(--noir);
+        }
+
+        img { display: block; max-width: 100%; }
+        a { color: inherit; text-decoration: none; }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            line-height: 1.2;
+        }
+
+        .skip-link {
+            position: absolute; top: -100%; left: 1rem;
+            padding: 0.6rem 1.2rem; background: var(--opale-or);
+            color: var(--noir); font-weight: 700; z-index: 20000;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* ═══════════════════════════
+           OPAL SHIMMER EFFECT
+           ═══════════════════════════ */
+
+        .opal-line {
+            height: 2px;
+            border: none;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--opale-vert),
+                var(--opale-or),
+                var(--opale-rose),
+                var(--opale-bleu),
+                var(--opale-or),
+                transparent
+            );
+            background-size: 300% 100%;
+            animation: opalShift 8s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes opalShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* ═══════════════════════════
+           ART NOUVEAU ORNAMENT SVG
+           ═══════════════════════════ */
+
+        .ornament {
+            display: block;
+            margin: 0 auto;
+            width: 280px;
+            height: 40px;
+            color: var(--bois-chaud);
+            opacity: 0.4;
+        }
+
+        .ornament-lg {
+            width: 400px;
+            height: 50px;
+        }
+
+        /* ═══════════════════════════
+           NAVIGATION
+           ═══════════════════════════ */
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 500;
+            padding: 1.2rem 5%;
+            transition: all 0.6s var(--ease);
+        }
+
+        nav.scrolled {
+            background: rgba(8, 7, 10, 0.92);
+            backdrop-filter: blur(20px);
+            padding: 0.8rem 5%;
+            border-bottom: 1px solid rgba(139, 107, 66, 0.15);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--font-ornate);
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--bois-miel);
+            letter-spacing: 3px;
+            transition: color 0.3s;
+        }
+
+        .nav-logo:hover { color: var(--opale-or); }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-family: var(--font-heading);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--texte-doux);
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '✦';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            font-size: 0.5rem;
+            color: var(--opale-or);
+            transition: transform 0.4s var(--ease);
+        }
+
+        .nav-links a:hover {
+            color: var(--bois-miel);
+        }
+
+        .nav-links a:hover::after {
+            transform: translateX(-50%) scale(1);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: 1px solid var(--bois-sombre);
+            color: var(--bois-miel);
+            width: 40px;
+            height: 40px;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .mobile-menu-btn:hover { border-color: var(--bois-chaud); }
+
+        /* ═══════════════════════════
+           HERO
+           ═══════════════════════════ */
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            overflow: hidden;
+        }
+
+        /* Radial glow */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 50% 40%, rgba(139, 107, 66, 0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 30% at 50% 60%, rgba(196, 154, 92, 0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-ornament-top {
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 1.2s var(--ease) 0.2s forwards;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--font-heading);
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--bois-chaud);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 1s var(--ease) 0.4s forwards;
+        }
+
+        .hero-name {
+            font-family: var(--font-ornate);
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            color: var(--bois-miel);
+            letter-spacing: 6px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 1.2s var(--ease) 0.6s forwards;
+            text-shadow: 0 0 60px rgba(196, 154, 92, 0.15);
+        }
+
+        /* Image papillon — pièce maîtresse */
+        .hero-sculpture {
+            position: relative;
+            width: min(90%, 800px);
+            margin: 0 auto 2.5rem;
+            opacity: 0;
+            animation: sculptureReveal 1.8s var(--ease) 0.8s forwards;
+        }
+
+        .hero-sculpture img {
+            width: 100%;
+            height: auto;
+            border-radius: 2px;
+            box-shadow:
+                0 0 40px rgba(196, 154, 92, 0.1),
+                0 0 120px rgba(139, 107, 66, 0.05);
+        }
+
+        /* Cadre Art Nouveau autour de la sculpture */
+        .hero-sculpture::before,
+        .hero-sculpture::after {
+            content: '';
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .hero-sculpture::before {
+            inset: -8px;
+            border: 1px solid var(--bois-chaud);
+            opacity: 0.25;
+            border-radius: 3px;
+        }
+
+        .hero-sculpture::after {
+            inset: -16px;
+            border: 1px solid var(--bois-sombre);
+            opacity: 0.15;
+            border-radius: 4px;
+        }
+
+        /* Opal shimmer bar sous la sculpture */
+        .hero-opal {
+            width: min(70%, 500px);
+            margin: 0 auto 2.5rem;
+            opacity: 0;
+            animation: fadeIn 1s var(--ease) 1.4s forwards;
+        }
+
+        @keyframes sculptureReveal {
+            from { opacity: 0; transform: scale(0.96); filter: brightness(0.5); }
+            to { opacity: 1; transform: scale(1); filter: brightness(1); }
+        }
+
+        .hero-motto {
+            font-family: var(--font-body);
+            font-size: 1.15rem;
+            font-style: italic;
+            font-weight: 300;
+            color: var(--texte-doux);
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+            opacity: 0;
+            animation: fadeIn 1s var(--ease) 1.6s forwards;
+        }
+
+        .hero-sub {
+            font-family: var(--font-heading);
+            font-size: 0.65rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--texte-dim);
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeIn 1s var(--ease) 1.8s forwards;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            font-family: var(--font-heading);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--bois-miel);
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--bois-chaud);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s var(--ease);
+            opacity: 0;
+            animation: fadeIn 1s var(--ease) 2s forwards;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--opale-vert), var(--opale-or), var(--opale-rose));
+            background-size: 200% 200%;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s var(--ease);
+            z-index: -1;
+            animation: opalShift 6s ease-in-out infinite;
+        }
+
+        .hero-cta:hover {
+            color: var(--noir);
+            border-color: transparent;
+        }
+
+        .hero-cta:hover::before {
+            transform: scaleX(1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ═══════════════════════════
+           SECTION DIVIDER
+           ═══════════════════════════ */
+
+        .divider {
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .divider .opal-line {
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* ═══════════════════════════
+           SECTIONS COMMUNES
+           ═══════════════════════════ */
+
+        .section-padding {
+            padding: 5rem 5%;
+        }
+
+        .section-narrow {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-family: var(--font-heading);
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--bois-chaud);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: var(--font-ornate);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 400;
+            color: var(--bois-miel);
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 300;
+            color: var(--texte-doux);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s var(--ease), transform 1s var(--ease);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-d1 { transition-delay: 0.1s; }
+        .reveal-d2 { transition-delay: 0.2s; }
+        .reveal-d3 { transition-delay: 0.3s; }
+
+        /* ═══════════════════════════
+           À PROPOS — L'ARTISAN
+           ═══════════════════════════ */
+
+        .about {
+            background: var(--nuit);
+            position: relative;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image-frame {
+            position: relative;
+        }
+
+        .about-image {
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 3/4;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(15%) contrast(1.05);
+            transition: filter 0.8s, transform 1s var(--ease);
+        }
+
+        .about-image:hover img {
+            filter: sepia(0%) contrast(1);
+            transform: scale(1.03);
+        }
+
+        /* Ornate frame */
+        .about-image-frame::before {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border: 1px solid var(--bois-chaud);
+            opacity: 0.2;
+        }
+
+        /* Corner ornaments */
+        .about-image-frame::after {
+            content: '✦';
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.6rem;
+            color: var(--opale-or);
+            opacity: 0.5;
+        }
+
+        .about-text h2 {
+            font-family: var(--font-ornate);
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--bois-miel);
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .about-motto {
+            font-style: italic;
+            font-weight: 300;
+            font-size: 1.05rem;
+            color: var(--opale-or);
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+            border-left: 2px solid;
+            border-image: linear-gradient(to bottom, var(--opale-vert), var(--opale-or), var(--opale-rose)) 1;
+            opacity: 0.7;
+        }
+
+        /* Drop cap */
+        .about-text .drop-cap::first-letter {
+            font-family: var(--font-ornate);
+            font-size: 3.5rem;
+            float: left;
+            color: var(--bois-miel);
+            line-height: 0.8;
+            margin-right: 0.6rem;
+            margin-top: 0.15rem;
+        }
+
+        .about-text p {
+            font-size: 0.95rem;
+            color: var(--texte-doux);
+            margin-bottom: 1.2rem;
+            line-height: 1.85;
+        }
+
+        .about-sig {
+            font-family: var(--font-ornate);
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--bois-chaud);
+            margin-top: 2rem;
+            opacity: 0.5;
+        }
+
+        /* ═══════════════════════════
+           GALERIE — CRÉATIONS
+           ═══════════════════════════ */
+
+        .gallery-section {
+            background: var(--noir);
+        }
+
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.4rem;
+            border: 1px solid var(--bois-sombre);
+            background: transparent;
+            font-family: var(--font-heading);
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--texte-doux);
+            cursor: pointer;
+            transition: all 0.4s;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--bois-chaud);
+            color: var(--bois-miel);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--opale-vert), var(--opale-or));
+            background-size: 200% 200%;
+            animation: opalShift 6s ease-in-out infinite;
+            border-color: transparent;
+            color: var(--noir);
+        }
+
+        /* Gothic arch gallery grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--bois-ombre);
+            /* Gothic pointed arch shape */
+            clip-path: polygon(0 5%, 50% 0, 100% 5%, 100% 100%, 0 100%);
+            transition: transform 0.5s var(--ease), box-shadow 0.5s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(139, 107, 66, 0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            filter: sepia(20%) contrast(1.05);
+            transition: filter 0.6s, transform 0.8s var(--ease);
+        }
+
+        .gallery-item:hover img {
+            filter: sepia(0%) contrast(1.1);
+            transform: scale(1.06);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2.5rem 1.5rem 1.5rem;
+            background: linear-gradient(0deg,
+                rgba(8, 7, 10, 0.9) 0%,
+                rgba(8, 7, 10, 0.3) 40%,
+                transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-title {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--bois-miel);
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+            transform: translateY(8px);
+            transition: transform 0.5s var(--ease);
+        }
+
+        .gallery-item:hover .gallery-title {
+            transform: translateY(0);
+        }
+
+        .gallery-cat {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--opale-or);
+            opacity: 0.8;
+            transform: translateY(8px);
+            transition: transform 0.5s var(--ease) 0.05s;
+        }
+
+        .gallery-item:hover .gallery-cat {
+            transform: translateY(0);
+        }
+
+        /* ═══════════════════════════
+           PHILOSOPHIE
+           ═══════════════════════════ */
+
+        .philosophy {
+            background: var(--nuit);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative background glyph */
+        .philosophy::before {
+            content: '✦';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 30rem;
+            color: var(--bois-chaud);
+            opacity: 0.015;
+            pointer-events: none;
+        }
+
+        .motto-block {
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-bottom: 3.5rem;
+            position: relative;
+        }
+
+        .motto-block::before,
+        .motto-block::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 1px;
+        }
+
+        .motto-block::before {
+            top: 0;
+            background: linear-gradient(90deg, transparent, var(--opale-or), transparent);
+        }
+
+        .motto-block::after {
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, var(--opale-rose), transparent);
+        }
+
+        .motto-text {
+            font-family: var(--font-ornate);
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 400;
+            color: var(--opale-or);
+            letter-spacing: 2px;
+            opacity: 0.7;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .value-card {
+            padding: 2.5rem;
+            border: 1px solid rgba(139, 107, 66, 0.12);
+            position: relative;
+            transition: all 0.5s var(--ease);
+            background: rgba(14, 12, 18, 0.5);
+        }
+
+        /* Ornate corner accents */
+        .value-card::before,
+        .value-card::after {
+            content: '◈';
+            position: absolute;
+            font-size: 0.5rem;
+            color: var(--bois-chaud);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .value-card::before { top: 8px; left: 10px; }
+        .value-card::after { bottom: 8px; right: 10px; }
+
+        .value-card:hover::before,
+        .value-card:hover::after {
+            opacity: 0.5;
+        }
+
+        .value-card:hover {
+            border-color: rgba(139, 107, 66, 0.3);
+            background: rgba(139, 107, 66, 0.03);
+            transform: translateY(-4px);
+        }
+
+        .value-icon {
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            display: block;
+            color: var(--opale-or);
+            opacity: 0.6;
+        }
+
+        .value-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--bois-miel);
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .value-card p {
+            font-size: 0.9rem;
+            color: var(--texte-doux);
+            line-height: 1.8;
+        }
+
+        /* ═══════════════════════════
+           CONTACT
+           ═══════════════════════════ */
+
+        .contact {
+            background: var(--noir);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 5rem;
+        }
+
+        .contact-info h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--bois-miel);
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info .subtitle {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--texte-doux);
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .contact-icon {
+            width: 34px;
+            height: 34px;
+            border: 1px solid var(--bois-sombre);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--opale-or);
+            font-size: 0.8rem;
+            transition: border-color 0.3s;
+        }
+
+        .contact-item:hover .contact-icon {
+            border-color: var(--bois-chaud);
+        }
+
+        .contact-item strong {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--texte-doux);
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-item span {
+            font-size: 0.9rem;
+            color: var(--texte);
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            border: 1px solid rgba(139, 107, 66, 0.15);
+            padding: 2.5rem;
+            position: relative;
+            background: var(--nuit);
+        }
+
+        /* Ornate corners */
+        .contact-form::before {
+            content: '◆';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.6rem;
+            color: var(--bois-chaud);
+            opacity: 0.4;
+            background: var(--noir);
+            padding: 0 8px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--texte-doux);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 0;
+            border: none;
+            border-bottom: 1px solid var(--bois-sombre);
+            background: transparent;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--texte);
+            transition: border-color 0.3s;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--texte-dim);
+            font-style: italic;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-image: linear-gradient(90deg, var(--opale-vert), var(--opale-or), var(--opale-rose)) 1;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--bois-chaud);
+            background: transparent;
+            font-family: var(--font-heading);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--bois-miel);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s var(--ease);
+        }
+
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--opale-vert), var(--opale-or), var(--opale-rose));
+            background-size: 200% 200%;
+            animation: opalShift 6s ease-in-out infinite;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s var(--ease);
+            z-index: 0;
+        }
+
+        .btn-submit:hover::before { transform: scaleX(1); }
+        .btn-submit:hover { color: var(--noir); border-color: transparent; }
+        .btn-submit span { position: relative; z-index: 1; }
+
+        /* ═══════════════════════════
+           FOOTER
+           ═══════════════════════════ */
+
+        footer {
+            background: var(--nuit);
+            text-align: center;
+            padding: 4rem 2rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-ornament {
+            margin-bottom: 2rem;
+        }
+
+        .footer-name {
+            font-family: var(--font-ornate);
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--bois-miel);
+            letter-spacing: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-motto {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--texte-doux);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .social-links a {
+            font-family: var(--font-heading);
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--texte-dim);
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover { color: var(--opale-or); }
+
+        .footer-copy {
+            font-size: 0.7rem;
+            color: var(--texte-dim);
+            letter-spacing: 1px;
+        }
+
+        /* ═══════════════════════════
+           CHATBOT — Consultation gothique
+           ═══════════════════════════ */
+
+        /* Toggle medallion */
+        .chat-medallion {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 600;
+            width: 56px;
+            height: 56px;
+            border: 1px solid var(--bois-chaud);
+            background: var(--nuit);
+            color: var(--opale-or);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s var(--ease);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 30px rgba(196, 154, 92, 0.05);
+            /* Octagon shape */
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+        }
+
+        .chat-medallion:hover {
+            background: var(--bois-sombre);
+            box-shadow: 0 4px 30px rgba(196, 154, 92, 0.15);
+            transform: scale(1.06);
+        }
+
+        .chat-medallion svg {
+            width: 22px;
+            height: 22px;
+            transition: transform 0.3s;
+        }
+
+        .chat-medallion.open svg {
+            transform: rotate(45deg);
+        }
+
+        /* Notification dot */
+        .chat-medallion-dot {
+            position: absolute;
+            top: 4px;
+            right: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--opale-or);
+            animation: statusPulse 2.5s ease-in-out infinite;
+        }
+
+        .chat-medallion.open .chat-medallion-dot { display: none; }
+
+        @keyframes statusPulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* Panel */
+        .chat-drawer {
+            position: fixed;
+            bottom: 5.5rem;
+            right: 2rem;
+            z-index: 599;
+            width: 360px;
+            max-height: 500px;
+            background: var(--nuit);
+            border: 1px solid rgba(139, 107, 66, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(12px) scale(0.97);
+            pointer-events: none;
+            transition: all 0.5s var(--ease);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(196, 154, 92, 0.03);
+        }
+
+        .chat-drawer.open {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .chat-header {
+            padding: 1.2rem 1.4rem;
+            border-bottom: 1px solid rgba(139, 107, 66, 0.12);
+            text-align: center;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .chat-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--opale-or), transparent);
+            opacity: 0.3;
+        }
+
+        .chat-header-label {
+            font-family: var(--font-heading);
+            font-size: 0.55rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--bois-chaud);
+            margin-bottom: 0.3rem;
+        }
+
+        .chat-header-name {
+            font-family: var(--font-ornate);
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--bois-miel);
+            letter-spacing: 2px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            min-height: 240px;
+            max-height: 300px;
+        }
+
+        .chat-messages::-webkit-scrollbar { width: 2px; }
+        .chat-messages::-webkit-scrollbar-thumb { background: var(--bois-sombre); }
+
+        .chat-msg {
+            max-width: 85%;
+            padding: 0.65rem 0.9rem;
+            font-size: 0.82rem;
+            line-height: 1.55;
+            animation: msgIn 0.3s var(--ease);
+        }
+
+        @keyframes msgIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-msg.bot {
+            align-self: flex-start;
+            background: var(--bois-ombre);
+            color: var(--texte);
+            border-left: 2px solid var(--bois-chaud);
+            font-style: italic;
+        }
+
+        .chat-msg.user {
+            align-self: flex-end;
+            background: rgba(212, 184, 106, 0.08);
+            color: var(--texte);
+            border-right: 2px solid var(--opale-or);
+        }
+
+        .chat-typing {
+            align-self: flex-start;
+            display: none;
+            gap: 4px;
+            padding: 0.65rem 0.9rem;
+            background: var(--bois-ombre);
+            border-left: 2px solid var(--bois-chaud);
+        }
+
+        .chat-typing.visible { display: flex; }
+
+        .chat-typing span {
+            width: 5px; height: 5px; border-radius: 50%;
+            background: var(--bois-chaud);
+            animation: typeDot 1.4s ease-in-out infinite;
+        }
+        .chat-typing span:nth-child(2) { animation-delay: 0.12s; }
+        .chat-typing span:nth-child(3) { animation-delay: 0.24s; }
+
+        @keyframes typeDot {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.3; }
+            30% { transform: translateY(-3px); opacity: 1; }
+        }
+
+        .chat-quick {
+            padding: 0.5rem 1.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            flex-shrink: 0;
+        }
+
+        .chat-quick-btn {
+            padding: 0.3rem 0.65rem;
+            border: 1px solid var(--bois-sombre);
+            background: transparent;
+            font-family: var(--font-body);
+            font-size: 0.68rem;
+            font-style: italic;
+            color: var(--texte-doux);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .chat-quick-btn:hover {
+            border-color: var(--opale-or);
+            color: var(--opale-or);
+        }
+
+        .chat-input-area {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1rem;
+            border-top: 1px solid rgba(139, 107, 66, 0.1);
+            background: var(--noir);
+            flex-shrink: 0;
+        }
+
+        .chat-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--texte);
+            outline: none;
+        }
+
+        .chat-input::placeholder { color: var(--texte-dim); }
+
+        .chat-send {
+            width: 30px; height: 30px;
+            border: 1px solid var(--bois-sombre);
+            background: transparent;
+            color: var(--opale-or);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+        }
+
+        .chat-send:hover {
+            background: var(--opale-or);
+            color: var(--noir);
+        }
+
+        .chat-send svg { width: 13px; height: 13px; }
+
+        .chat-via {
+            text-align: center;
+            padding: 0.35rem;
+            font-size: 0.5rem;
+            color: var(--texte-dim);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: var(--font-heading);
+        }
+
+        /* ═══════════════════════════
+           LIGHTBOX
+           ═══════════════════════════ */
+
+        .lightbox {
+            display: none; position: fixed; inset: 0;
+            background: rgba(8,7,10,0.96); z-index: 5000;
+            justify-content: center; align-items: center;
+            padding: 3rem; backdrop-filter: blur(10px);
+        }
+
+        .lightbox.active { display: flex; animation: lbIn 0.3s; }
+
+        @keyframes lbIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .lightbox-inner { position: relative; max-width: 80%; }
+
+        .lightbox-inner img {
+            max-width: 100%; max-height: 80vh; object-fit: contain;
+            animation: lbZoom 0.5s var(--ease);
+            box-shadow: 0 0 60px rgba(196, 154, 92, 0.08);
+        }
+
+        @keyframes lbZoom {
+            from { transform: scale(0.94); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .lightbox-close {
+            position: absolute; top: -2.5rem; right: 0;
+            background: none; border: none; color: var(--texte-doux);
+            font-size: 1.3rem; cursor: pointer; transition: color 0.3s;
+        }
+
+        .lightbox-close:hover { color: var(--opale-or); }
+
+        .lightbox-caption {
+            text-align: center; margin-top: 1.2rem;
+            font-family: var(--font-heading); font-size: 1.2rem;
+            color: var(--bois-miel); letter-spacing: 1px;
+        }
+
+        .lightbox-cat {
+            text-align: center; margin-top: 0.3rem;
+            font-size: 0.6rem; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--opale-or);
+        }
+
+        /* ═══════════════════════════
+           MOBILE
+           ═══════════════════════════ */
+
+        .mobile-nav-overlay {
+            display: none; position: fixed; inset: 0; z-index: 499;
+            background: rgba(8,7,10,0.96); backdrop-filter: blur(20px);
+            flex-direction: column; justify-content: center;
+            align-items: center; gap: 2rem;
+        }
+
+        .mobile-nav-overlay.open { display: flex; }
+
+        .mobile-nav-overlay a {
+            font-family: var(--font-heading);
+            font-size: 1.1rem; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--texte-doux);
+            transition: color 0.3s;
+        }
+
+        .mobile-nav-overlay a:hover { color: var(--opale-or); }
+
+        @media (max-width: 1024px) {
+            .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+            .values-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .section-padding { padding: 4rem 5%; }
+            .gallery-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .form-row { grid-template-columns: 1fr; }
+            .ornament, .ornament-lg { width: 200px; }
+
+            .chat-drawer {
+                right: 0; bottom: 0; left: 0;
+                width: 100%; max-height: 75vh;
+                border-radius: 0;
+            }
+
+            .chat-medallion { bottom: 1.2rem; right: 1.2rem; width: 48px; height: 48px; }
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--opale-or);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+            .reveal { opacity: 1; transform: none; }
+            html { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Aller au contenu</a>
+
+    <!-- Navigation -->
+    <nav id="navbar" role="navigation" aria-label="Navigation principale">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">Édouard Desrosiers</a>
+            <ul class="nav-links" id="navLinks" role="list">
+                <li><a href="#about">L'Artisan</a></li>
+                <li><a href="#gallery">Créations</a></li>
+                <li><a href="#philosophy">Philosophie</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileBtn" aria-label="Menu" aria-expanded="false">☰</button>
+        </div>
+    </nav>
+
+    <!-- Mobile nav overlay -->
+    <div class="mobile-nav-overlay" id="mobileOverlay">
+        <a href="#about" data-close>L'Artisan</a>
+        <a href="#gallery" data-close>Créations</a>
+        <a href="#philosophy" data-close>Philosophie</a>
+        <a href="#contact" data-close>Contact</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-ornament-top" aria-hidden="true">
+            <!-- Art Nouveau ornament -->
+            <svg class="ornament ornament-lg" viewBox="0 0 400 50" preserveAspectRatio="xMidYMid meet">
+                <path d="M0,25 C40,25 60,8 100,15 C130,20 150,38 175,25 C185,20 192,22 200,25 C208,22 215,20 225,25 C250,38 270,20 300,15 C340,8 360,25 400,25"
+                      stroke="currentColor" fill="none" stroke-width="0.8"/>
+                <circle cx="200" cy="25" r="3" fill="currentColor" opacity="0.5"/>
+                <circle cx="200" cy="25" r="6" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+                <path d="M170,25 C180,18 190,22 200,18 C210,22 220,18 230,25" stroke="currentColor" fill="none" stroke-width="0.5" opacity="0.4"/>
+                <path d="M170,25 C180,32 190,28 200,32 C210,28 220,32 230,25" stroke="currentColor" fill="none" stroke-width="0.5" opacity="0.4"/>
+            </svg>
+        </div>
+
+        <p class="hero-eyebrow">Ébénisterie d'Art & Sculpture</p>
+        <h1 class="hero-name">Édouard Desrosiers</h1>
+
+        <!-- Pièce maîtresse — Sculpture papillon-opale -->
+        <div class="hero-sculpture">
+            <img src="images/edouard_papillon.png"
+                 alt="Sculpture sur bois d'un papillon gothique avec opale incrustée — Œuvre d'Édouard Desrosiers">
+        </div>
+
+        <div class="hero-opal">
+            <hr class="opal-line">
+        </div>
+
+        <p class="hero-motto">« Lève la tête et regarde plus loin »</p>
+        <p class="hero-sub">Sculpture sur bois · Québec</p>
+        <a href="#gallery" class="hero-cta">Découvrir les œuvres</a>
+    </section>
+
+    <main id="main">
+
+    <!-- Divider -->
+    <div class="divider" aria-hidden="true">
+        <hr class="opal-line">
+        <svg class="ornament" viewBox="0 0 400 50" preserveAspectRatio="xMidYMid meet">
+            <path d="M0,25 C50,25 80,10 120,18 C160,26 180,40 200,25 C220,10 240,26 280,18 C320,10 350,25 400,25" stroke="currentColor" fill="none" stroke-width="0.7"/>
+            <circle cx="200" cy="25" r="2.5" fill="currentColor" opacity="0.4"/>
+        </svg>
+    </div>
+
+    <!-- À propos -->
+    <section class="about section-padding" id="about">
+        <div class="section-narrow">
+            <div class="section-header reveal">
+                <span class="section-label">✦ L'Artisan ✦</span>
+                <h2 class="section-title">Gravé dans le temps</h2>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-image-frame reveal">
+                    <div class="about-image">
+                        <img src="images/edouard_atelier.png"
+                             alt="Édouard Desrosiers dans son atelier, sculptant une pièce en bois massif"
+                             loading="lazy">
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h2 class="reveal">Une histoire gravée dans le temps</h2>
+                    <p class="about-motto reveal reveal-d1">"Lève la tête et regarde plus loin"</p>
+                    <p class="drop-cap reveal reveal-d1">
+                        Dans mon atelier, chaque pièce de bois raconte une histoire
+                        que je m'efforce de révéler. Depuis vingt ans, je sculpte non seulement la matière, mais aussi
+                        une vision : celle d'un art qui élève l'âme et dépasse le quotidien.
+                    </p>
+                    <p class="reveal reveal-d2">
+                        Mon travail puise son inspiration dans les forêts du Québec, là où les arbres touchent le ciel.
+                        Chaque création — qu'il s'agisse d'une chaise, d'une sculpture ou d'un simple objet du quotidien —
+                        porte en elle cette invitation à regarder plus haut, à chercher la beauté au-delà de l'évidence.
+                    </p>
+                    <p class="reveal reveal-d2">
+                        Je travaille l'érable, le noyer et le chêne avec des outils qui ont appartenu à mon grand-père,
+                        dans une démarche qui honore la tradition tout en embrassant la modernité. Car regarder plus loin,
+                        c'est aussi respecter d'où l'on vient.
+                    </p>
+                    <p class="about-sig reveal reveal-d3">— Édouard</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="divider" aria-hidden="true">
+        <svg class="ornament" viewBox="0 0 400 50" preserveAspectRatio="xMidYMid meet">
+            <path d="M0,25 C50,25 80,10 120,18 C160,26 180,40 200,25 C220,10 240,26 280,18 C320,10 350,25 400,25" stroke="currentColor" fill="none" stroke-width="0.7"/>
+            <circle cx="200" cy="25" r="2.5" fill="currentColor" opacity="0.4"/>
+        </svg>
+        <hr class="opal-line">
+    </div>
+
+    <!-- Galerie -->
+    <section class="gallery-section section-padding" id="gallery">
+        <div class="section-narrow">
+            <div class="section-header reveal">
+                <span class="section-label">✦ Créations ✦</span>
+                <h2 class="section-title">Les Œuvres</h2>
+                <p class="section-desc">Où le bois rencontre l'âme</p>
+            </div>
+
+            <div class="filter-bar reveal">
+                <button class="filter-btn active" data-filter="tous">Tout voir</button>
+                <button class="filter-btn" data-filter="sculpture">Sculptures</button>
+                <button class="filter-btn" data-filter="meuble">Mobilier</button>
+                <button class="filter-btn" data-filter="objet">Objets</button>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item reveal" data-category="sculpture" tabindex="0" role="button" aria-label="Vers le Ciel">
+                    <img src="https://images.unsplash.com/photo-1561839561-b13bcfe95249?w=500&h=660&fit=crop" alt="Sculpture Vers le Ciel" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Vers le Ciel</h3>
+                        <span class="gallery-cat">Sculpture — Érable sycomore</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item reveal reveal-d1" data-category="meuble" tabindex="0" role="button" aria-label="Racines et Branches">
+                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&h=660&fit=crop" alt="Table Racines et Branches" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Racines et Branches</h3>
+                        <span class="gallery-cat">Table — Noyer noir</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item reveal reveal-d2" data-category="objet" tabindex="0" role="button" aria-label="Élévation">
+                    <img src="https://images.unsplash.com/photo-1611486212557-88be5ff6f941?w=500&h=660&fit=crop" alt="Vase Élévation" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Élévation</h3>
+                        <span class="gallery-cat">Vase sculpté — Frêne</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item reveal" data-category="sculpture" tabindex="0" role="button" aria-label="Le Regard tourné">
+                    <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=500&h=660&fit=crop" alt="Buste Le Regard tourné" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Le Regard tourné</h3>
+                        <span class="gallery-cat">Buste — Chêne centenaire</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item reveal reveal-d1" data-category="meuble" tabindex="0" role="button" aria-label="La Grande Bibliothèque">
+                    <img src="https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=500&h=660&fit=crop" alt="Bibliothèque en merisier" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">La Grande Bibliothèque</h3>
+                        <span class="gallery-cat">Meuble — Merisier massif</span>
+                    </div>
+                </div>
+
+                <div class="gallery-item reveal reveal-d2" data-category="objet" tabindex="0" role="button" aria-label="Lumière d'Horizon">
+                    <img src="https://images.unsplash.com/photo-1605112442948-8112bb4e5ad8?w=500&h=660&fit=crop" alt="Lampe Lumière d'Horizon" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Lumière d'Horizon</h3>
+                        <span class="gallery-cat">Lampe — Bouleau</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="divider" aria-hidden="true">
+        <hr class="opal-line">
+        <svg class="ornament" viewBox="0 0 400 50" preserveAspectRatio="xMidYMid meet">
+            <path d="M0,25 C50,25 80,10 120,18 C160,26 180,40 200,25 C220,10 240,26 280,18 C320,10 350,25 400,25" stroke="currentColor" fill="none" stroke-width="0.7"/>
+            <circle cx="200" cy="25" r="2.5" fill="currentColor" opacity="0.4"/>
+        </svg>
+    </div>
+
+    <!-- Philosophie -->
+    <section class="philosophy section-padding" id="philosophy">
+        <div class="section-narrow">
+            <div class="section-header reveal">
+                <span class="section-label">✦ Approche ✦</span>
+                <h2 class="section-title">Philosophie</h2>
+                <p class="section-desc">Plus qu'un métier, une façon de voir</p>
+            </div>
+
+            <div class="motto-block reveal">
+                <p class="motto-text">« Lève la tête et regarde plus loin »</p>
+            </div>
+
+            <div class="values-grid">
+                <div class="value-card reveal">
+                    <span class="value-icon">🌲</span>
+                    <h3>Le Bois local</h3>
+                    <p>Je récupère des arbres tombés ou coupés pour raisons sanitaires dans la région. Chaque pièce a poussé sous nos ciels, porte notre histoire.</p>
+                </div>
+
+                <div class="value-card reveal reveal-d1">
+                    <span class="value-icon">↑</span>
+                    <h3>La Verticalité</h3>
+                    <p>Mes créations invitent au regard vers le haut. Je privilégie les lignes qui montent, les formes qui s'élancent, les perspectives qui ouvrent l'espace.</p>
+                </div>
+
+                <div class="value-card reveal reveal-d2">
+                    <span class="value-icon">✦</span>
+                    <h3>Sur mesure</h3>
+                    <p>Chaque commande commence par une conversation. Je m'implique dans votre projet pour créer une pièce qui dépasse vos attentes et transforme votre espace.</p>
+                </div>
+
+                <div class="value-card reveal reveal-d3">
+                    <span class="value-icon">∞</span>
+                    <h3>Patrimoine vivant</h3>
+                    <p>Je restaure les meubles anciens avec le même soin que je crée les neufs. Passer le flambeau, c'est aussi regarder plus loin que sa propre génération.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="divider" aria-hidden="true">
+        <svg class="ornament" viewBox="0 0 400 50" preserveAspectRatio="xMidYMid meet">
+            <path d="M0,25 C50,25 80,10 120,18 C160,26 180,40 200,25 C220,10 240,26 280,18 C320,10 350,25 400,25" stroke="currentColor" fill="none" stroke-width="0.7"/>
+            <circle cx="200" cy="25" r="2.5" fill="currentColor" opacity="0.4"/>
+        </svg>
+        <hr class="opal-line">
+    </div>
+
+    <!-- Contact -->
+    <section class="contact section-padding" id="contact">
+        <div class="section-narrow">
+            <div class="section-header reveal">
+                <span class="section-label">✦ Atelier ✦</span>
+                <h2 class="section-title">Commençons une histoire</h2>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <h3>Visitez l'atelier</h3>
+                    <p class="subtitle">Sur rendez-vous uniquement</p>
+
+                    <div class="contact-item">
+                        <span class="contact-icon">↗</span>
+                        <div>
+                            <strong>Atelier-Boutique</strong>
+                            <span>387 Chemin du Haut-Pays<br>La Malbaie, QC G5A 2P5</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">☎</span>
+                        <div>
+                            <strong>Téléphone</strong>
+                            <span>(418) 555-0147</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">✉</span>
+                        <div>
+                            <strong>Courriel</strong>
+                            <span>edouard@desrosiers-bois.com</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">◷</span>
+                        <div>
+                            <strong>Heures d'ouverture</strong>
+                            <span>Mar — Sam : 10h à 18h<br>Dim : sur rendez-vous</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form reveal reveal-d1" id="contactForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nom">Nom</label>
+                            <input type="text" id="nom" name="nom" placeholder="Votre nom complet" required autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Courriel</label>
+                            <input type="email" id="email" name="email" placeholder="votre@courriel.com" required autocomplete="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sujet">Sujet</label>
+                        <input type="text" id="sujet" name="sujet" placeholder="Commande sur mesure, restauration..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre projet</label>
+                        <textarea id="message" name="message" placeholder="Décrivez votre projet, vos rêves..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit"><span>Envoyer à Édouard</span></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-ornament" aria-hidden="true">
+            <svg class="ornament" viewBox="0 0 400 50" preserveAspectRatio="xMidYMid meet">
+                <path d="M0,25 C50,25 80,10 120,18 C160,26 180,40 200,25 C220,10 240,26 280,18 C320,10 350,25 400,25" stroke="currentColor" fill="none" stroke-width="0.7"/>
+                <circle cx="200" cy="25" r="2.5" fill="currentColor" opacity="0.4"/>
+            </svg>
+        </div>
+        <h3 class="footer-name">Édouard Desrosiers</h3>
+        <p class="footer-motto">"Lève la tête et regarde plus loin"</p>
+        <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">LinkedIn</a>
+        </div>
+        <p class="footer-copy">© 2024 Édouard Desrosiers — Québec</p>
+    </footer>
+
+    <!-- Chatbot — Médaillon gothique -->
+    <button class="chat-medallion" id="chatMedallion" aria-label="Consulter l'artisan" aria-expanded="false">
+        <span class="chat-medallion-dot"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+    </button>
+
+    <div class="chat-drawer" id="chatDrawer" role="dialog" aria-label="Consultation avec l'artisan">
+        <div class="chat-header">
+            <div class="chat-header-label">Consulter l'Artisan</div>
+            <div class="chat-header-name">Édouard Desrosiers</div>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-quick" id="chatQuick"></div>
+        <div class="chat-input-area">
+            <input class="chat-input" id="chatInput" type="text" placeholder="Posez votre question..." autocomplete="off">
+            <button class="chat-send" id="chatSend" aria-label="Envoyer">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+        </div>
+        <div class="chat-via">via Telegram</div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+        <div class="lightbox-inner">
+            <button class="lightbox-close" aria-label="Fermer">&times;</button>
+            <img src="" alt="" id="lbImg">
+            <div class="lightbox-caption" id="lbCaption"></div>
+            <div class="lightbox-cat" id="lbCat"></div>
+        </div>
+    </div>
+
+    <script>
+        /* ═══════════════════════════
+           NAVIGATION
+           ═══════════════════════════ */
+
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 80);
+        }, { passive: true });
+
+        // Mobile menu
+        const mobileBtn = document.getElementById('mobileBtn');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        mobileBtn.addEventListener('click', () => {
+            const open = mobileOverlay.classList.toggle('open');
+            mobileBtn.setAttribute('aria-expanded', open);
+            mobileBtn.textContent = open ? '✕' : '☰';
+            document.body.style.overflow = open ? 'hidden' : '';
+        });
+
+        mobileOverlay.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                mobileOverlay.classList.remove('open');
+                mobileBtn.setAttribute('aria-expanded', 'false');
+                mobileBtn.textContent = '☰';
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+
+        /* ═══════════════════════════
+           REVEAL ON SCROLL
+           ═══════════════════════════ */
+
+        const revealObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+        /* ═══════════════════════════
+           GALLERY FILTER
+           ═══════════════════════════ */
+
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                galleryItems.forEach((item, i) => {
+                    const match = filter === 'tous' || item.dataset.category === filter;
+                    if (match) {
+                        item.style.display = '';
+                        item.style.opacity = '0';
+                        setTimeout(() => {
+                            item.style.transition = 'opacity 0.5s';
+                            item.style.opacity = '1';
+                        }, i * 80);
+                    } else {
+                        item.style.opacity = '0';
+                        setTimeout(() => item.style.display = 'none', 400);
+                    }
+                });
+            });
+        });
+
+        /* ═══════════════════════════
+           LIGHTBOX
+           ═══════════════════════════ */
+
+        const lightbox = document.getElementById('lightbox');
+
+        function openLB(item) {
+            document.getElementById('lbImg').src = item.querySelector('img').src;
+            document.getElementById('lbCaption').textContent = item.querySelector('.gallery-title').textContent;
+            document.getElementById('lbCat').textContent = item.querySelector('.gallery-cat').textContent;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => openLB(item));
+            item.addEventListener('keydown', (e) => { if (e.key === 'Enter') openLB(item); });
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target.classList.contains('lightbox-close')) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        /* ═══════════════════════════
+           CONTACT FORM
+           ═══════════════════════════ */
+
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Merci pour votre message ! Édouard vous répondra sous peu.');
+            e.target.reset();
+        });
+
+        /* ═══════════════════════════
+           CHATBOT
+           ═══════════════════════════ */
+
+        const chatMedallion = document.getElementById('chatMedallion');
+        const chatDrawer = document.getElementById('chatDrawer');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const chatSend = document.getElementById('chatSend');
+        const chatQuick = document.getElementById('chatQuick');
+        let chatInit = false;
+
+        const botR = {
+            greetings: ['Bienvenue. Je suis l\'assistant d\'Édouard — ébéniste sculpteur. Comment puis-je vous guider ?'],
+            commande: 'Pour une commande sur mesure, Édouard commence par une conversation pour comprendre votre vision. Décrivez votre projet ici, il vous recontactera personnellement.',
+            prix: 'Chaque œuvre est unique — le prix dépend de l\'essence, de la complexité et des dimensions. Une soumission détaillée est préparée après consultation.',
+            delai: 'Comptez 4 à 8 semaines pour un meuble, 2 à 4 semaines pour une sculpture ou un objet. Un échéancier précis est fourni.',
+            visite: 'L\'atelier est ouvert du mardi au samedi, 10h à 18h. Le dimanche sur rendez-vous. Appelez au (418) 555-0147.',
+            bois: 'Édouard travaille l\'érable, le noyer noir, le chêne, le frêne, le merisier et le bouleau — tous récupérés localement.',
+            restauration: 'Les meubles anciens sont restaurés avec un soin particulier. Envoyez des photos pour un premier avis.',
+            fallback: 'Merci. Je transmets votre message à Édouard — il vous répondra dans les plus brefs délais.',
+        };
+
+        const qData = [
+            { label: 'Commande', key: 'commande' },
+            { label: 'Tarifs', key: 'prix' },
+            { label: 'Délais', key: 'delai' },
+            { label: 'Visite', key: 'visite' },
+            { label: 'Essences', key: 'bois' },
+            { label: 'Restauration', key: 'restauration' },
+        ];
+
+        function addMsg(text, type) {
+            const m = document.createElement('div');
+            m.className = `chat-msg ${type}`;
+            m.textContent = text;
+            chatMessages.appendChild(m);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTyping() {
+            let t = chatMessages.querySelector('.chat-typing');
+            if (!t) { t = document.createElement('div'); t.className = 'chat-typing'; t.innerHTML = '<span></span><span></span><span></span>'; chatMessages.appendChild(t); }
+            t.classList.add('visible');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTyping() { const t = chatMessages.querySelector('.chat-typing'); if (t) t.remove(); }
+
+        function showQR() {
+            chatQuick.innerHTML = '';
+            qData.forEach(q => {
+                const b = document.createElement('button');
+                b.className = 'chat-quick-btn';
+                b.textContent = q.label;
+                b.addEventListener('click', () => { addMsg(q.label, 'user'); chatQuick.innerHTML = ''; reply(q.key); });
+                chatQuick.appendChild(b);
+            });
+        }
+
+        function detectIntent(text) {
+            const t = text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            if (/\b(bonjour|allo|salut|hey|hello)\b/.test(t)) return 'greetings';
+            if (/\b(commande|sur mesure|projet|creer|fabriquer)\b/.test(t)) return 'commande';
+            if (/\b(prix|cout|combien|tarif|budget)\b/.test(t)) return 'prix';
+            if (/\b(delai|temps|quand|livraison|semaine)\b/.test(t)) return 'delai';
+            if (/\b(visite|atelier|adresse|venir|horaire)\b/.test(t)) return 'visite';
+            if (/\b(bois|essence|erable|noyer|chene)\b/.test(t)) return 'bois';
+            if (/\b(restaur|reparer|ancien|antique)\b/.test(t)) return 'restauration';
+            return 'fallback';
+        }
+
+        function reply(key) {
+            showTyping();
+            setTimeout(() => {
+                hideTyping();
+                const p = botR[key];
+                addMsg(Array.isArray(p) ? p[0] : p, 'bot');
+                if (key !== 'fallback') setTimeout(showQR, 300);
+            }, 500 + Math.random() * 700);
+        }
+
+        function sendMsg() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+            addMsg(text, 'user');
+            chatInput.value = '';
+            chatQuick.innerHTML = '';
+            reply(detectIntent(text));
+        }
+
+        chatMedallion.addEventListener('click', () => {
+            const open = chatDrawer.classList.toggle('open');
+            chatMedallion.classList.toggle('open');
+            chatMedallion.setAttribute('aria-expanded', open);
+            if (open && !chatInit) {
+                chatInit = true;
+                setTimeout(() => { addMsg('Bienvenue. Je suis l\'assistant d\'Édouard Desrosiers. Comment puis-je vous guider ?', 'bot'); setTimeout(showQR, 400); }, 400);
+            }
+            if (open) setTimeout(() => chatInput.focus(), 200);
+        });
+
+        chatSend.addEventListener('click', sendMsg);
+        chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); sendMsg(); } });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && chatDrawer.classList.contains('open')) {
+                chatDrawer.classList.remove('open');
+                chatMedallion.classList.remove('open');
+                chatMedallion.setAttribute('aria-expanded', 'false');
+            }
+        });
+    </script>
+</body>
+</html>
